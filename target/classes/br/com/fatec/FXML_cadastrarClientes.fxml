@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="776.0" prefWidth="707.0" style="-fx-background-color: lavenderBlush;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXML_cadastrarClientesController">
+    <stylesheets>
+        <URL value="@/br/com/fatec/css/fxml_cadastrarclientes.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="773.0" fitWidth="563.0" layoutX="75.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="74.27032470703125">
+         <image>
+            <Image url="@../../../image/clientes.jpeg" />
+         </image>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+      </ImageView>
+      <Button fx:id="btnMenu_Cli" layoutX="308.0" layoutY="583.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnMenu_Cli_click" prefHeight="10.0" prefWidth="80.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="MENU" textFill="black" />
+      <HBox alignment="CENTER" fillHeight="false" layoutX="136.0" layoutY="532.0" prefHeight="41.0" prefWidth="424.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnIncluir_Cli" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnIncluir_Cli_click" prefHeight="8.0" prefWidth="80.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="INCLUIR" textFill="black">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnPesquisar_Cli" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnPesquisar_click" prefHeight="8.0" prefWidth="80.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="PESQUISAR" textFill="black" />
+            <Button fx:id="btnAlterar_Cli" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnAlterar_click" prefHeight="8.0" prefWidth="80.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="ALTERAR" textFill="black" />
+            <Button fx:id="btnExcluir_Cli" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnExcluir_click" prefHeight="8.0" prefWidth="80.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="EXCLUIR" textFill="black" />
+         </children>
+      </HBox>
+      <GridPane layoutX="133.0" layoutY="265.0" prefHeight="181.0" prefWidth="317.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="38.0" text="CPF:">
+               <GridPane.margin>
+                  <Insets left="90.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="NOME DO CLIENTE:" GridPane.rowIndex="1" />
+            <Label text="EMAIL:" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="80.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="75.0" text="CELULAR:" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="60.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="ENDEREÇO:" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="txtCpf_Cli" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" />
+            <TextField fx:id="txtNomeCl_Cli" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtEmail_Cli" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtCel_Cli" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtEnd_Cli" prefHeight="25.0" prefWidth="152.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="CEP:" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="75.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="txtCEP" prefHeight="25.0" prefWidth="152.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="160.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="145.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

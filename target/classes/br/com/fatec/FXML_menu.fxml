@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="345.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXML_menuController">
+    <stylesheets>
+        <URL value="@/br/com/fatec/css/fxml_menu.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="700.0" layoutX="-3.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../image/menuprincipal.jpeg" />
+         </image>
+      </ImageView>
+      <VBox layoutX="233.0" layoutY="129.0" prefHeight="164.0" prefWidth="232.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnClientes" mnemonicParsing="false" onAction="#btnClientes_click" prefHeight="31.0" prefWidth="233.0" style="-fx-background-color: mistyrose; -fx-border-color: black;" text="CADASTRAR CLIENTES" textFill="black" />
+            <Button fx:id="btnPedidos" mnemonicParsing="false" onAction="#btnPedidos_click" prefHeight="31.0" prefWidth="236.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="CADASTRAR PEDIDOS" textFill="black" />
+            <Button fx:id="btnProdutos" mnemonicParsing="false" onAction="#btnProdutos_click" prefHeight="31.0" prefWidth="244.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="CADASTRAR PRODUTOS" textFill="black" />
+            <Button fx:id="btnFornecedores" mnemonicParsing="false" onAction="#btnFornecedores_click" prefHeight="31.0" prefWidth="244.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="CADASTRAR FORNECEDORES" textFill="black" />
+            <Button fx:id="btnConsultar" mnemonicParsing="false" onAction="#btnConsultar_click" prefHeight="75.0" prefWidth="232.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="CONSULTAR PEDIDOS" textFill="black" />
+            <Button fx:id="btnCadastrarIngredientes" mnemonicParsing="false" onAction="#btnCadastrarIngredientes_click" prefHeight="75.0" prefWidth="232.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="CADASTRAR INGREDIENTES" textFill="black" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
