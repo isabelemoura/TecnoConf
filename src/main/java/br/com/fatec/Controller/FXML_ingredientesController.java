@@ -11,6 +11,7 @@ import br.com.fatec.model.Fornecedor;
 import br.com.fatec.model.Ingredientes;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -62,6 +65,10 @@ public class FXML_ingredientesController implements Initializable {
     private ComboBox<String> cb_unidadesMedidas;
     @FXML
     private ComboBox<String> cb_tipoProduto;
+    @FXML
+    private TextField txtIdProduto;
+    @FXML
+    private Button btnDelete;
 
     /**
      * Initializes the controller class.
@@ -106,7 +113,7 @@ public class FXML_ingredientesController implements Initializable {
         } else {
             if (ingreDAO.insere(moveDadosTelaModel()) == true) {
                 mensagem("Ingrediente criado com sucesso ");
-               // limpar();
+                // limpar();
             } else if (moveDadosTelaModel() == null) {
                 System.out.println("Verifique os campos");
             }
@@ -123,40 +130,60 @@ public class FXML_ingredientesController implements Initializable {
 
     @FXML
     private void btnBuscar_click(ActionEvent event) throws SQLException {
-       IngredientesDAO ingreDAO = new IngredientesDAO();
-        Ingredientes cliente = ingreDAO.buscaID(moveDadosTelaModel());
-        if (cliente == null) {
-            Alert alerta = new Alert(Alert.AlertType.ERROR,
-                    "Não foi possível localizar o registro",
-                    ButtonType.OK
-            );
-            alerta.showAndWait();
-        } else {
-            moveDadosModelTela(cliente);
-        }
+        IngredientesDAO ingreDAO = new IngredientesDAO();
 
+        if (txtIdProduto.getText().equals("")) {
+            mensagem("Digite o ID do produto");
+        } else {
+            if (cb_fornecedor.getValue() == null) {
+                mensagem("Selecione um fornecedor");
+            } else {
+                Ingredientes ingre = ingreDAO.buscaID(moveDadosTelaModel());
+                if (ingre == null) {
+                    Alert alerta = new Alert(Alert.AlertType.ERROR,
+                            "Não foi possível localizar o registro pois este fornecedor pode não fornecer este produto",
+                            ButtonType.OK
+                    );
+                    limpar();
+                    alerta.showAndWait();
+                } else {
+                    moveDadosModelTela(ingre);
+                }
+            }
+        }
     }
 
     @FXML
-    private void btnAlterar_click(ActionEvent event) {
+    private void btnAlterar_click(ActionEvent event) throws SQLException {
+        IngredientesDAO ingreDAO = new IngredientesDAO();
+        boolean alterou = false;
+        if (!estaVazio()) {
+            alterou = ingreDAO.altera(moveDadosTelaModel());
+            if (alterou) {
+                mensagem("Os dados foram alterados com sucesso!");
+            } else {
+                mensagem("Verifique os campos");
+            }
+        } else {
+            mensagem("Preencha todos os campos");
+        }
     }
 
     public Ingredientes moveDadosTelaModel() {
         Ingredientes ingre = new Ingredientes();
-    
-            ingre.setFornecedor(cb_fornecedor.getValue());
-            ingre.setQuantidade(txtQuantidade.getText());
-            ingre.setNomeProduto(txtNomeProduto.getText());
-            ingre.setFornecedor(cb_fornecedor.getValue());
-            ingre.setTipoProduto(cb_tipoProduto.getValue());
-            ingre.setUnidadeMedida(cb_unidadesMedidas.getValue());
-            for (Fornecedor forne : fornecedores) {
-                if (cb_fornecedor.getValue().toString().equals(forne.getNomeFornecedor())) {
-                    ingre.setCNPJ(forne.getCNPJ());
-                }
-            }
 
-        
+        ingre.setFornecedor(cb_fornecedor.getValue());
+        ingre.setQuantidade(txtQuantidade.getText());
+        ingre.setNomeProduto(txtNomeProduto.getText());
+        ingre.setTipoProduto(cb_tipoProduto.getValue());
+        ingre.setUnidadeMedida(cb_unidadesMedidas.getValue());
+        ingre.setIdIngrediente(Integer.parseInt(txtIdProduto.getText()));
+        ingre.setIdIngrediente(Integer.parseInt(txtIdProduto.getText()));
+        for (Fornecedor forne : fornecedores) {
+            if (cb_fornecedor.getValue().toString().equals(forne.getNomeFornecedor())) {
+                ingre.setCNPJ(forne.getCNPJ());
+            }
+        }
 
         return ingre;
     }
@@ -164,24 +191,14 @@ public class FXML_ingredientesController implements Initializable {
     private void moveDadosModelTela(Ingredientes ingre) throws SQLException {
         txtNomeProduto.setText(ingre.getNomeProduto());
         txtQuantidade.setText(ingre.getQuantidade());
-        cb_fornecedor.setValue(ingre.getFornecedor());
+        txtIdProduto.setText(Integer.toString(ingre.getIdIngrediente()));
         cb_tipoProduto.setValue(ingre.getTipoProduto());
         cb_unidadesMedidas.setValue(ingre.getUnidadeMedida());
     }
 
     @FXML
-    private void cb_fornecedor_click(ActionEvent event) {
-//        Ingredientes ingre = new Ingredientes();
-//        for (Fornecedor forne : fornecedores) {
-//            if (cb_fornecedor.getValue().toString().equals(forne.getNomeFornecedor())) {
-//                ingre.setCNPJ(forne.getCNPJ());
-//                System.out.println("CNPJ: " + forne.getCNPJ());
-//                return ingre.getCNPJ();
-//            }
-//        }
-//        return null;
-        Ingredientes in = moveDadosTelaModel();
-        System.out.println(in.getCNPJ());
+    private void cb_fornecedor_click(ActionEvent event) throws SQLException {
+
     }
 
     public boolean estaVazio() {
@@ -198,6 +215,47 @@ public class FXML_ingredientesController implements Initializable {
         cb_fornecedor.setValue(null);
         cb_tipoProduto.setValue(null);
         cb_unidadesMedidas.setValue(null);
+
+    }
+
+    @FXML
+    private void txtIdProduto_exited(MouseEvent event) {
+
+    }
+
+    @FXML
+    private void btnDelete_click(ActionEvent event) throws SQLException {
+        IngredientesDAO ingreDAO = new IngredientesDAO();
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+
+        
+
+        if (!estaVazio()) {
+            alerta.setTitle("ALERTA");
+            alerta.setContentText("Você realmente deseja deletar este registro?");
+            Optional<ButtonType> result = alerta.showAndWait();
+            if (result.isEmpty()) {
+                System.out.println("Alerta fechado");
+            } else if (result.get() == ButtonType.OK) {
+                if (ingreDAO.remove(moveDadosTelaModel())) {
+                    alerta = new Alert(Alert.AlertType.INFORMATION,
+                            "Ingrediente deletado com sucesso!",
+                            ButtonType.OK
+                    );
+                    alerta.showAndWait();
+                    limpar();
+                } else {
+                    alerta = new Alert(Alert.AlertType.INFORMATION,
+                            "Não foi possivel deletar este ingrediente!",
+                            ButtonType.OK
+                    );
+                    alerta.showAndWait();
+                }
+
+            }
+        } else {
+            mensagem("Preencha todos os campos");
+        }
 
     }
 

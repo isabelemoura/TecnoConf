@@ -48,41 +48,58 @@ public class IngredientesDAO implements DAO<Ingredientes> {
 
     @Override
     public boolean remove(Ingredientes model) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean delerou = false;
+        String sql = "DELETE FROM ingredientes where idProduto = ? and Cnpj = ?";
+        
+        Banco.conectar();
+        pst = Banco.obterConexao().prepareStatement(sql);
+        pst.setString(1, Integer.toString(model.getIdIngrediente()));
+        pst.setString(2, model.getCNPJ());
+        
+        delerou = pst.executeUpdate() > 0 ? true : false;
+        return delerou;
+        
     }
 
     @Override
     public boolean altera(Ingredientes model) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean alterou = false;
+        String sql = "update ingredientes set nomeProduto=?,Qtde=?,nomeFornecedor=?,tipoProduto=?,unMedida=?, Cnpj=? where idProduto = ?";
+        
+        Banco.conectar();
+        pst = Banco.obterConexao().prepareStatement(sql);
+        pst.setString(1, model.getNomeProduto());
+        pst.setString(2, model.getQuantidade());
+        pst.setString(3, model.getFornecedor().getNomeFornecedor());
+        pst.setString(4, model.getTipoProduto());
+        pst.setString(5, model.getUnidadeMedida());
+        pst.setString(6, model.getCNPJ());
+        pst.setString(7, Integer.toString(model.getIdIngrediente()));
+        alterou = pst.executeUpdate() > 0 ? true : false;
+        return alterou;
     }
 
     @Override
     public Ingredientes buscaID(Ingredientes model) throws SQLException {
+       
+        String sql = "SELECT * FROM ingredientes WHERE idProduto = ? and Cnpj=?";
         ingredientes = null;
-        String sql = "select * from ingredientes where Cnpj = ?";
         Banco.conectar();
-
-        pst = Banco.obterConexao().prepareStatement(sql);
-        pst.setString(1, model.getCNPJ());
         
+        pst = Banco.obterConexao().prepareStatement(sql);
+        pst.setString(1, Integer.toString(model.getIdIngrediente()));
+        pst.setString(2, model.getCNPJ());
         rs = pst.executeQuery();
-        while (rs.next()) {
-            
+        while(rs.next()){
+            ingredientes = new Ingredientes();
+            ingredientes.setCNPJ(rs.getString("Cnpj"));
+            ingredientes.setIdIngrediente(Integer.parseInt(rs.getString("idProduto")));
             ingredientes.setNomeProduto(rs.getString("nomeProduto"));
             ingredientes.setQuantidade(rs.getString("Qtde"));
             ingredientes.setTipoProduto(rs.getString("tipoProduto"));
             ingredientes.setUnidadeMedida(rs.getString("unMedida"));
-            
-            Fornecedor forne = new Fornecedor();
-            FornecedorDAO fdao  = new FornecedorDAO();
-            forne.setNomeFornecedor(rs.getString("nomeFornecedor"));
-            forne = fdao.buscaID(forne);
-            ingredientes.setFornecedor(forne);
-
         }
 
-        Banco.desconectar();
-        System.out.println("Fornecedor CNPJ: "+ model.getCNPJ());
         
         return ingredientes;
     }

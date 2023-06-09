@@ -19,14 +19,16 @@ public class Ingredientes {
     private String CNPJ;
     private String unidadeMedida;
     private String tipoProduto;
+    private int idIngrediente;
 
-    public Ingredientes(String nomeProduto, String quantidade, Fornecedor fornecedor, String CNPJ, String unidadeMedida, String tipoProduto) {
+    public Ingredientes(String nomeProduto, String quantidade, Fornecedor fornecedor, String CNPJ, String unidadeMedida, String tipoProduto, int idIngrediente) {
         this.nomeProduto = nomeProduto;
         this.quantidade = quantidade;
         this.fornecedor = fornecedor;
         this.CNPJ = CNPJ;
         this.unidadeMedida = unidadeMedida;
         this.tipoProduto = tipoProduto;
+        this.idIngrediente = idIngrediente;
     }
     
 
@@ -34,6 +36,16 @@ public class Ingredientes {
     }
     //asdasdas
 
+    public int getIdIngrediente() {
+        return idIngrediente;
+    }
+
+    public void setIdIngrediente(int idIngrediente) {
+        this.idIngrediente = idIngrediente;
+    }
+
+    
+    
     public String getTipoProduto() {
         return tipoProduto;
     }

@@ -32,19 +32,19 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#btnBuscar_click" style="-fx-border-color: black; -fx-background-color: linen;" text="ALTERAR">
+            <Button fx:id="btnAlterar" mnemonicParsing="false" onAction="#btnAlterar_click" style="-fx-border-color: black; -fx-background-color: linen;" text="ALTERAR">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnAlterar" mnemonicParsing="false" onAction="#btnAlterar_click" style="-fx-border-color: black; -fx-background-color: linen;" text="DELETAR">
+            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDelete_click" style="-fx-border-color: black; -fx-background-color: linen;" text="DELETAR">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <GridPane layoutX="400.0" layoutY="222.0" prefHeight="205.0" prefWidth="333.0">
+      <GridPane layoutX="400.0" layoutY="222.0" prefHeight="205.0" prefWidth="355.0">
          <children>
             <TextField fx:id="txtNomeProduto" style="-fx-border-color: BLACK;" GridPane.columnIndex="1">
                <GridPane.margin>
@@ -82,10 +82,16 @@
                </GridPane.margin></Label>
             <ComboBox fx:id="cb_unidadesMedidas" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: linen;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="cb_tipoProduto" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: linen;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtIdProduto" onMouseExited="#txtIdProduto_exited" promptText="ID" style="-fx-border-color: BLACK;" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="188.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="66.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="112.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="39.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
