@@ -60,7 +60,7 @@ public class FornecedorDAO implements DAO<Fornecedor> {
         boolean alterou = false;
         String sql = "update fornecedor telefoneFornecedor=?, nomeFornecedor=?, cep=?, enderecoFornecedor=? where Cnpj = ?";
         Banco.conectar();
-        pst = Banco.obterConexao().prepareStatement(sql); 
+        pst = Banco.obterConexao().prepareStatement(sql);
         pst.setString(1, model.getCelular());
         pst.setString(2, model.getNomeFornecedor());
         pst.setString(3, model.getCep());
@@ -88,7 +88,7 @@ public class FornecedorDAO implements DAO<Fornecedor> {
             fornecedor.setEndereco(rs.getString("enderecoFornecedor"));
             fornecedor.setNomeFornecedor(rs.getString("nomeFornecedor"));
             fornecedor.setCep(rs.getString("cep"));
-            
+
         }
 
         Banco.desconectar();
@@ -122,7 +122,11 @@ public class FornecedorDAO implements DAO<Fornecedor> {
             try {
                 fornecedor = new Fornecedor();
                 //move os dados do resultSet para o objeto fornecedor
+                fornecedor.setCNPJ(rs.getString("Cnpj"));
+                fornecedor.setCelular(rs.getString("telefoneFornecedor"));
+                fornecedor.setEndereco(rs.getString("enderecoFornecedor"));
                 fornecedor.setNomeFornecedor(rs.getString("nomeFornecedor"));
+                fornecedor.setCep(rs.getString("cep"));
                 //adicionar na coleção
 
                 listagem.add(fornecedor);

@@ -89,7 +89,7 @@ public class FXML_cadastroProdutosController implements Initializable {
         p.setNomeProduto(txtNomeProd_Prod.getText());
         p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         p.setDataVencimento(txtDataVencimento.getValue());
-        p.setCategoria(cb_Categoria.getValue());
+        p.setCategoria(txtCategoria.getText());
         
         return p;
 }

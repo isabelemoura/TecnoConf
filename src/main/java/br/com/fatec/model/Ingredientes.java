@@ -13,19 +13,17 @@ import java.util.Objects;
  */
 public class Ingredientes {
     private String nomeProduto;
-    private int quantidade;
+    private String quantidade;
     //composição
     private Fornecedor fornecedor;
-    private String endereco;
     private String CNPJ;
     private String unidadeMedida;
     private String tipoProduto;
 
-    public Ingredientes(String nomeProduto, int quantidade, Fornecedor fornecedor, String endereco, String CNPJ, String unidadeMedida, String tipoProduto) {
+    public Ingredientes(String nomeProduto, String quantidade, Fornecedor fornecedor, String CNPJ, String unidadeMedida, String tipoProduto) {
         this.nomeProduto = nomeProduto;
         this.quantidade = quantidade;
         this.fornecedor = fornecedor;
-        this.endereco = endereco;
         this.CNPJ = CNPJ;
         this.unidadeMedida = unidadeMedida;
         this.tipoProduto = tipoProduto;
@@ -93,11 +91,11 @@ public class Ingredientes {
         this.nomeProduto = nomeProduto;
     }
 
-    public int getQuantidade() {
+    public String getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(String quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -107,14 +105,6 @@ public class Ingredientes {
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getCNPJ() {

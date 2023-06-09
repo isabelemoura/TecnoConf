@@ -34,7 +34,7 @@ public class FXML_ingredientesController implements Initializable {
     private TextField txtNomeProduto;
     @FXML
     private TextField txtQuantidade;
-    
+
     @FXML
     private Button btnIncluir;
     @FXML
@@ -47,15 +47,15 @@ public class FXML_ingredientesController implements Initializable {
     private ComboBox<Fornecedor> cb_fornecedor;
 
     private Fornecedor fornecedor;
-    
+
     private FornecedorDAO forneDAO = new FornecedorDAO();
 
     private ObservableList<Fornecedor> fornecedores
             = FXCollections.observableArrayList();
-    
+
     private ObservableList<String> unidadesMedidas
             = FXCollections.observableArrayList();
-    
+
     private ObservableList<String> tiposDeProdutos
             = FXCollections.observableArrayList();
     @FXML
@@ -73,23 +73,25 @@ public class FXML_ingredientesController implements Initializable {
         preencheTiposP();
     }
 
-    private void preencheUnidades(){
+    private void preencheUnidades() {
         unidadesMedidas.add("KG");
         unidadesMedidas.add("ML");
         unidadesMedidas.add("CAIXA");
+
         cb_unidadesMedidas.setItems(unidadesMedidas);
     }
-    
-    private void preencheTiposP(){
+
+    private void preencheTiposP() {
         tiposDeProdutos.add("PERECIVEL");
         tiposDeProdutos.add("NÃO PERECIVEL");
+
         cb_tipoProduto.setItems(tiposDeProdutos);
     }
-    
-    
+
     private void preencheCombo() {
         try {
             fornecedores.addAll(forneDAO.lista(""));
+
         } catch (SQLException ex) {
             System.out.println("Erro no preenchimento da combo" + ex);
         }
@@ -99,21 +101,40 @@ public class FXML_ingredientesController implements Initializable {
     @FXML
     private void btnIncluir_click(ActionEvent event) throws SQLException {
         IngredientesDAO ingreDAO = new IngredientesDAO();
-        try {
-            if (ingreDAO.insere(moveDadosTelaModel())) {
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION,
-                        "Ingrediente criado com sucesso!",
-                        ButtonType.OK
-                );
+        if (estaVazio()) {
+            mensagem("Preencha todos os campos");
+        } else {
+            if (ingreDAO.insere(moveDadosTelaModel()) == true) {
+                mensagem("Ingrediente criado com sucesso ");
+               // limpar();
+            } else if (moveDadosTelaModel() == null) {
+                System.out.println("Verifique os campos");
             }
-        } catch (SQLException ex) {
-            System.out.println("Erro: " + ex.getMessage());
         }
+    }
 
+    public void mensagem(String mensagem) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION,
+                mensagem,
+                ButtonType.OK
+        );
+        alerta.showAndWait();
     }
 
     @FXML
-    private void btnBuscar_click(ActionEvent event) {
+    private void btnBuscar_click(ActionEvent event) throws SQLException {
+       IngredientesDAO ingreDAO = new IngredientesDAO();
+        Ingredientes cliente = ingreDAO.buscaID(moveDadosTelaModel());
+        if (cliente == null) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR,
+                    "Não foi possível localizar o registro",
+                    ButtonType.OK
+            );
+            alerta.showAndWait();
+        } else {
+            moveDadosModelTela(cliente);
+        }
+
     }
 
     @FXML
@@ -122,20 +143,62 @@ public class FXML_ingredientesController implements Initializable {
 
     public Ingredientes moveDadosTelaModel() {
         Ingredientes ingre = new Ingredientes();
-        ingre.setFornecedor(cb_fornecedor.getValue());
-        ingre.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-        ingre.setNomeProduto(txtNomeProduto.getText());
-        ingre.setCNPJ("");
-        ingre.setTipoProduto(cb_tipoProduto.getValue());
-        ingre.setUnidadeMedida(cb_unidadesMedidas.getValue());
+    
+            ingre.setFornecedor(cb_fornecedor.getValue());
+            ingre.setQuantidade(txtQuantidade.getText());
+            ingre.setNomeProduto(txtNomeProduto.getText());
+            ingre.setFornecedor(cb_fornecedor.getValue());
+            ingre.setTipoProduto(cb_tipoProduto.getValue());
+            ingre.setUnidadeMedida(cb_unidadesMedidas.getValue());
+            for (Fornecedor forne : fornecedores) {
+                if (cb_fornecedor.getValue().toString().equals(forne.getNomeFornecedor())) {
+                    ingre.setCNPJ(forne.getCNPJ());
+                }
+            }
+
         
+
         return ingre;
+    }
+
+    private void moveDadosModelTela(Ingredientes ingre) throws SQLException {
+        txtNomeProduto.setText(ingre.getNomeProduto());
+        txtQuantidade.setText(ingre.getQuantidade());
+        cb_fornecedor.setValue(ingre.getFornecedor());
+        cb_tipoProduto.setValue(ingre.getTipoProduto());
+        cb_unidadesMedidas.setValue(ingre.getUnidadeMedida());
     }
 
     @FXML
     private void cb_fornecedor_click(ActionEvent event) {
-        
-       
+//        Ingredientes ingre = new Ingredientes();
+//        for (Fornecedor forne : fornecedores) {
+//            if (cb_fornecedor.getValue().toString().equals(forne.getNomeFornecedor())) {
+//                ingre.setCNPJ(forne.getCNPJ());
+//                System.out.println("CNPJ: " + forne.getCNPJ());
+//                return ingre.getCNPJ();
+//            }
+//        }
+//        return null;
+        Ingredientes in = moveDadosTelaModel();
+        System.out.println(in.getCNPJ());
+    }
+
+    public boolean estaVazio() {
+        if (txtNomeProduto.getText().isEmpty() || txtQuantidade.getText().isEmpty() || cb_fornecedor.getValue() == null || cb_tipoProduto.getValue() == null || cb_unidadesMedidas.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void limpar() {
+        txtNomeProduto.clear();
+        txtQuantidade.clear();
+        cb_fornecedor.setValue(null);
+        cb_tipoProduto.setValue(null);
+        cb_unidadesMedidas.setValue(null);
+
     }
 
 }
