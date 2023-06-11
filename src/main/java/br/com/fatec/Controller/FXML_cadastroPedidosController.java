@@ -221,6 +221,7 @@ public class FXML_cadastroPedidosController implements Initializable {
                         "Não foi possível localizar o registro",
                         ButtonType.OK
                 );
+                limpar();
                 alerta.showAndWait();
 
             } else {

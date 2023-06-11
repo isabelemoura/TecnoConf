@@ -68,7 +68,7 @@ public class PedidoDAO implements DAO<Pedido> {
     @Override
     public boolean remove(Pedido model) throws SQLException {
         boolean removeu = false;
-        String sql = "delete from pedidos where idPedido = ?";
+        String sql = "delete from pedido where idPedido = ?";
 
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);

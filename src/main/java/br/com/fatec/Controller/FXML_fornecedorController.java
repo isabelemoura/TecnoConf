@@ -11,6 +11,7 @@ import br.com.fatec.model.Fornecedor;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,20 +112,27 @@ public class FXML_fornecedorController implements Initializable {
 
     @FXML
     private void btnExcluir_click(ActionEvent event) throws SQLException {
-        FornecedorDAO forneDAO = new FornecedorDAO();
-        if (txtCNPJ.getText().isEmpty()) {
-            Alert alerta = new Alert(Alert.AlertType.INFORMATION,
-                    "Preencha o campo CNPJ para excluir o fornecedor!",
-                    ButtonType.OK);
-            alerta.showAndWait();
-        } else {
-            if (forneDAO.remove(moveDadosTelaModel())) {
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION,
-                        "O CNPJ " + txtCNPJ.getText() + " foi excluido com sucesso!",
-                        ButtonType.OK);
+        FornecedorDAO cliDAO = new FornecedorDAO();
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+
+        if (!estaVazio()) {
+            alerta.setTitle("ALERTA");
+            alerta.setContentText("Você realmente deseja deletar este registro?");
+            Optional<ButtonType> result = alerta.showAndWait();
+
+            if (result.isEmpty()) {
+                System.out.println("Alerta fechado");
+            } else if (result.get() == ButtonType.OK) {
+                cliDAO.remove(moveDadosTelaModel());
+                alerta = new Alert(Alert.AlertType.INFORMATION,
+                        "Cliente deletado com sucesso!",
+                        ButtonType.OK
+                );
                 alerta.showAndWait();
                 limpar();
             }
+        } else {
+            mensagemWarning("Preencha todos os campos");
         }
     }
 
@@ -202,6 +210,30 @@ public class FXML_fornecedorController implements Initializable {
 
     @FXML
     private void validarCNPJ(MouseEvent event) {
+    }
+    
+    public void mensagemInvalidacao(String mensage) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR,
+                mensage,
+                ButtonType.OK
+        );
+        alerta.showAndWait();
+    }
+
+    public void mensagemInformation(String mensage) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION,
+                mensage,
+                ButtonType.OK
+        );
+        alerta.showAndWait();
+    }
+
+    public void mensagemWarning(String mensage) {
+        Alert alerta = new Alert(Alert.AlertType.WARNING,
+                mensage,
+                ButtonType.OK
+        );
+        alerta.showAndWait();
     }
 
 }
