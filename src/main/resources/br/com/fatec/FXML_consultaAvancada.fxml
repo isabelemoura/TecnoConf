@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1110.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXML_consultaAvancadaController">
+    <stylesheets>
+        <URL value="@/br/com/fatec/css/fxml_consultaavancada.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1085.0" style="-fx-background-color: white" styleClass="mainFxmlClass">
+         <children>
+            <AnchorPane layoutX="3.0" prefHeight="227.0" prefWidth="1110.0" style="-fx-background-color:mistyrose">
+               <children>
+                  <Button fx:id="btn_menuPed" layoutX="950.0" layoutY="61.0" mnemonicParsing="false" onAction="#btn_menuPed_click" style="-fx-background-color: PINK; -fx-border-color: BLACK;" text="MENU" textFill="black" />
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="800.0" fitWidth="700.0" layoutX="212.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="300.7608642578125">
+               <image>
+                  <Image url="@../../../image/consultarpedidos.jpeg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="txtPesquisa" layoutX="490.0" layoutY="320.0" prefHeight="31.0" prefWidth="190.0" style="-fx-background-color: lightgrey;" />
+            <Button fx:id="btn_PesquisarPed" layoutX="687.0" layoutY="321.0" mnemonicParsing="false" onAction="#btn_PesquisarPed" style="-fx-background-color: PINK;" text="PESQUISAR" textFill="black" />
+            <ComboBox fx:id="cb_Selecione" layoutX="275.0" layoutY="320.0" prefHeight="31.0" prefWidth="207.0" promptText="Selecione um filtro" style="-fx-background-color: PINK;" />
+            <TableView fx:id="tblPedido" layoutX="90.0" layoutY="359.0" prefHeight="371.0" prefWidth="895.0" style="-fx-background-color:white">
+               <columns>
+                  <TableColumn fx:id="colCPF" prefWidth="81.0" text="CPF" />
+                  <TableColumn fx:id="colNomeCliente" prefWidth="145.0" text="NOME DO CLIENTE" />
+                  <TableColumn fx:id="colPreco" prefWidth="75.0" text="PREÇO" />
+                  <TableColumn fx:id="colCelular" prefWidth="96.0" text="CELULAR" />
+                  <TableColumn fx:id="colDataPedido" prefWidth="138.0" text="DATA DO PEDIDO" />
+                  <TableColumn fx:id="colStatusPedido" prefWidth="152.0" text="STATUS DO PEDIDO" />
+                  <TableColumn fx:id="colObsPedido" prefWidth="209.0" text="OBSERVAÇÕES DO PEDIDO" />
+               </columns>
+            </TableView>
+         </children>
+         <stylesheets>
+            <URL value="@/br/com/fatec/css/fxml_cadastrarclientes.css" />
+         </stylesheets>
+      </AnchorPane>
+   </children>
+</AnchorPane>
