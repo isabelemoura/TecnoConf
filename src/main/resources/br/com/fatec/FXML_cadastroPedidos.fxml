@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="778.0" prefWidth="709.0" style="-fx-background-color: white;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXML_cadastroPedidosController">
+    <stylesheets>
+        <URL value="@/br/com/fatec/css/fxml_cadastropedidos.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="772.0" fitWidth="553.0" layoutX="65.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="74.0">
+         <image>
+            <Image url="@../../../image/pedido1.0.jpeg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnMenu_Ped" layoutX="455.0" layoutY="712.0" mnemonicParsing="false" onAction="#btnMenu_Ped_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="MENU" textFill="black" />
+      <HBox alignment="CENTER" layoutX="297.0" layoutY="665.0" prefHeight="33.0" prefWidth="381.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnIncluir_Ped" mnemonicParsing="false" onAction="#btnIncluir_Ped_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="INCLUIR" textFill="black">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnPesquisar_Ped" mnemonicParsing="false" onAction="#btnPesquisar_Ped" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="PESQUISAR" textFill="black" />
+            <Button fx:id="btnAlterar_Ped" mnemonicParsing="false" onAction="#btnAlterar_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="ALTERAR" textFill="black" />
+            <Button fx:id="btnExcluir_Ped" mnemonicParsing="false" onAction="#btnExcluir_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="EXCLUIR" textFill="black" />
+         </children>
+      </HBox>
+      <GridPane layoutX="277.0" layoutY="183.0" prefHeight="330.0" prefWidth="357.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="135.0" text="NOME DO CLIENTE:" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="64.0" text="PREÇO:" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="81.0" text="CELULAR:" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="125.0" text="DATA DO PEDIDO:" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="82.0" text="ID PEDIDO:">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_idPedido" maxHeight="-Infinity" prefHeight="33.0" prefWidth="61.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtNomeCliente" disable="true" prefHeight="33.0" prefWidth="146.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtPreco" prefHeight="33.0" prefWidth="138.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtCelular" disable="true" prefHeight="33.0" prefWidth="147.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label prefHeight="21.0" prefWidth="144.0" text="STATUS DO PEDIDO:" GridPane.rowIndex="6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cb_statusPedido" prefHeight="33.0" prefWidth="148.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Label prefHeight="21.0" prefWidth="64.0" text="CPF:" GridPane.rowIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <TextField fx:id="txtCPF" onMouseExited="#pesquisaCPF" prefHeight="33.0" prefWidth="147.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label prefHeight="21.0" prefWidth="186.0" text="OBSERVAÇÕES DO PEDIDO:" GridPane.rowIndex="7">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="txtData" prefHeight="33.0" prefWidth="147.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="292.0" minWidth="30.0" prefWidth="199.0" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="328.0" minWidth="124.0" percentWidth="-0.0" prefWidth="157.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <TextField fx:id="txtObsPed" layoutX="488.0" layoutY="478.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="210.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextField>
+   </children>
+</AnchorPane>

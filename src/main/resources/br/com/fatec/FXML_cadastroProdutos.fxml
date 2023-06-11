@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="769.0" prefWidth="691.0" style="-fx-background-color: white;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXML_cadastroProdutosController">
+   <stylesheets>
+      <URL value="@/br/com/fatec/css/fxml_cadastroprodutos.css" />
+   </stylesheets>
+   <children>
+      <ImageView fitHeight="744.0" fitWidth="552.0" layoutX="60.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="105.9000244140625">
+         <image>
+            <Image url="@../../../image/produto1.0.jpeg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnMenu_Pro" layoutX="478.0" layoutY="666.0" mnemonicParsing="false" onAction="#btnMenu_Pro_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="MENU" textFill="black" />
+      <HBox layoutX="325.0" layoutY="617.0" prefHeight="41.0" prefWidth="371.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnIncluir_Prod" mnemonicParsing="false" onAction="#btnIncluir_Prod_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="INCLUIR" textFill="black">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnPesquisar_Prod" mnemonicParsing="false" onAction="#btnPesquisar_Prod_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="PESQUISAR" textFill="black" />
+            <Button fx:id="btnAlterar_Prod" mnemonicParsing="false" onAction="#btnAlterar_Prod_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="ALTERAR" textFill="black" />
+            <Button fx:id="btnExcluir_Prod" mnemonicParsing="false" onAction="#btnExcluir_Prod_click" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" text="EXCLUIR" textFill="black" />
+         </children>
+      </HBox>
+      <GridPane layoutX="272.0" layoutY="225.0" prefHeight="223.0" prefWidth="412.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="141.0" text="QUANTIDADE:" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="90.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="104.0" text="VENCIMENTO:" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="85.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="96.0" text="ID PRODUTO:">
+               <GridPane.margin>
+                  <Insets left="90.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="171.0" text="NOME DO PRODUTO:" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="40.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="txt_idProduto" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtQuantidade" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <ComboBox fx:id="cb_Categoria" prefHeight="220.0" prefWidth="205.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <DatePicker fx:id="txtDataVencimento" prefHeight="45.0" prefWidth="219.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </DatePicker>
+            <TextField fx:id="txtNomeProd_Prod" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label prefHeight="21.0" prefWidth="89.0" text="CATEGORIA:" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="95.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="21.0" prefWidth="189.0" text="DESCRICAO CATEGORIA" GridPane.rowIndex="3" />
+            <TextField fx:id="txtCategoria" prefHeight="27.0" prefWidth="209.0" style="-fx-background-color: mistyrose; -fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin></TextField>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.0" minWidth="30.0" prefWidth="195.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="-Infinity" percentWidth="-0.0" prefWidth="225.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>
