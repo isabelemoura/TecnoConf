@@ -11,8 +11,11 @@ import br.com.fatec.model.Ingredientes;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Collection;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  *
@@ -28,19 +31,29 @@ public class IngredientesDAO implements DAO<Ingredientes> {
     public boolean insere(Ingredientes model) throws SQLException {
 
         boolean inseriu = false;
-        String sql = "insert into ingredientes(nomeProduto,Qtde,nomeFornecedor,tipoProduto,unMedida, Cnpj)"
-                + "values(?,?,?,?,?,?)";
+        String sql = "insert into ingredientes(idProduto, nomeProduto,Qtde,nomeFornecedor,tipoProduto,unMedida, Cnpj)"
+                + "values(?,?,?,?,?,?,?)";
 
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);
-        pst.setString(1, model.getNomeProduto());
-        pst.setString(2, model.getQuantidade());
-        pst.setString(3, model.getFornecedor().getNomeFornecedor());
-        pst.setString(4, model.getTipoProduto());
-        pst.setString(5, model.getUnidadeMedida());
-        pst.setString(6, model.getCNPJ());
+        pst.setString(1, Integer.toString(model.getIdIngrediente()));
+        pst.setString(2, model.getNomeProduto());
+        pst.setString(3, model.getQuantidade());
+        pst.setString(4, model.getFornecedor().getNomeFornecedor());
+        pst.setString(5, model.getTipoProduto());
+        pst.setString(6, model.getUnidadeMedida());
+        pst.setString(7, model.getCNPJ());
+        try {
+            inseriu = pst.executeUpdate() > 0 ? true : false;
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR,
+                    "Este ID já existe na base de dados!",
+                    ButtonType.OK
+            );
 
-        inseriu = pst.executeUpdate() > 0 ? true : false;
+            alerta.showAndWait();
+        }
+
         Banco.desconectar();
 
         return inseriu;
@@ -50,22 +63,22 @@ public class IngredientesDAO implements DAO<Ingredientes> {
     public boolean remove(Ingredientes model) throws SQLException {
         boolean delerou = false;
         String sql = "DELETE FROM ingredientes where idProduto = ? and Cnpj = ?";
-        
+
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);
         pst.setString(1, Integer.toString(model.getIdIngrediente()));
         pst.setString(2, model.getCNPJ());
-        
+
         delerou = pst.executeUpdate() > 0 ? true : false;
         return delerou;
-        
+
     }
 
     @Override
     public boolean altera(Ingredientes model) throws SQLException {
         boolean alterou = false;
         String sql = "update ingredientes set nomeProduto=?,Qtde=?,nomeFornecedor=?,tipoProduto=?,unMedida=?, Cnpj=? where idProduto = ?";
-        
+
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);
         pst.setString(1, model.getNomeProduto());
@@ -81,16 +94,16 @@ public class IngredientesDAO implements DAO<Ingredientes> {
 
     @Override
     public Ingredientes buscaID(Ingredientes model) throws SQLException {
-       
+
         String sql = "SELECT * FROM ingredientes WHERE idProduto = ? and Cnpj=?";
         ingredientes = null;
         Banco.conectar();
-        
+
         pst = Banco.obterConexao().prepareStatement(sql);
         pst.setString(1, Integer.toString(model.getIdIngrediente()));
         pst.setString(2, model.getCNPJ());
         rs = pst.executeQuery();
-        while(rs.next()){
+        while (rs.next()) {
             ingredientes = new Ingredientes();
             ingredientes.setCNPJ(rs.getString("Cnpj"));
             ingredientes.setIdIngrediente(Integer.parseInt(rs.getString("idProduto")));
@@ -100,7 +113,6 @@ public class IngredientesDAO implements DAO<Ingredientes> {
             ingredientes.setUnidadeMedida(rs.getString("unMedida"));
         }
 
-        
         return ingredientes;
     }
 

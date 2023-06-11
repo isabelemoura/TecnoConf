@@ -110,13 +110,11 @@ public class FXML_ingredientesController implements Initializable {
     @FXML
     private void btnIncluir_click(ActionEvent event) throws SQLException {
         IngredientesDAO ingreDAO = new IngredientesDAO();
-        txtIdProduto.setText("0");
         if (estaVazio()) {
             mensagem("Preencha todos os campos");
         } else {
             if (ingreDAO.insere(moveDadosTelaModel()) == true) {
                 mensagem("Ingrediente criado com sucesso ");
-                txtIdProduto.setText("ID");
                 limpar();
                 // limpar();
             } else if (moveDadosTelaModel() == null) {
@@ -176,13 +174,11 @@ public class FXML_ingredientesController implements Initializable {
 
     public Ingredientes moveDadosTelaModel() {
         Ingredientes ingre = new Ingredientes();
-
         ingre.setFornecedor(cb_fornecedor.getValue());
         ingre.setQuantidade(txtQuantidade.getText());
         ingre.setNomeProduto(txtNomeProduto.getText());
         ingre.setTipoProduto(cb_tipoProduto.getValue());
         ingre.setUnidadeMedida(cb_unidadesMedidas.getValue());
-        ingre.setIdIngrediente(Integer.parseInt(txtIdProduto.getText()));
         ingre.setIdIngrediente(Integer.parseInt(txtIdProduto.getText()));
         for (Fornecedor forne : fornecedores) {
             if (cb_fornecedor.getValue().toString().equals(forne.getNomeFornecedor())) {
@@ -207,7 +203,7 @@ public class FXML_ingredientesController implements Initializable {
     }
 
     public boolean estaVazio() {
-        if (txtNomeProduto.getText().isEmpty() || txtQuantidade.getText().isEmpty() || cb_fornecedor.getValue() == null || cb_tipoProduto.getValue() == null || cb_unidadesMedidas.getValue() == null) {
+        if (txtIdProduto.getText().isEmpty() || txtNomeProduto.getText().isEmpty() || txtQuantidade.getText().isEmpty() || cb_fornecedor.getValue() == null || cb_tipoProduto.getValue() == null || cb_unidadesMedidas.getValue() == null) {
             return true;
         } else {
             return false;

@@ -60,13 +60,16 @@ ALTER TABLE Fornecedor
     ADD CONSTRAINT FK_Ingredientes_Fornecedor
     FOREIGN KEY (Cnpj) REFERENCES Fornecedor (Cnpj) ON DELETE CASCADE;
 
---Altera o enderecoFornecedor para tipoProduto
+-- idPedido agora não tem mais AUTO_INCREMENT
+ALTER TABLE `ingredientes` CHANGE `idProduto` `idProduto` INT(11) NOT NULL;
+
+-- Altera o enderecoFornecedor para tipoProduto
 alter table ingredientes CHANGE COLUMN enderecoFornecedor tipoProduto varchar(15);
 
---Deleta a coluna nomeProduto da tabela pedido
+-- Deleta a coluna nomeProduto da tabela pedido
 alter table pedido drop COLUMN nomeProduto;
 
---O idPedido não pode ser AUTO_INCREMENTO, O USUARIO DEVE INSERIR UM ID MANUAL
+-- O idPedido não pode ser AUTO_INCREMENTO, O USUARIO DEVE INSERIR UM ID MANUAL
 ALTER TABLE `pedido` CHANGE `idPedido` `idPedido` INT(11) NOT NULL;
 
 -- Inserir dados na tabela Andamento baseado nos registros da tabela Pedido
