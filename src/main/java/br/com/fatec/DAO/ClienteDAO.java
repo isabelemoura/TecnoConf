@@ -59,7 +59,7 @@ public class ClienteDAO implements DAO<Cliente> {
     @Override
     public boolean altera(Cliente model) throws SQLException {
         boolean alterado = false;
-        String sql = "update Cliente set nomeCliente = ?, emailCliente = ?, celularCliente = ?, cep=?, enderecoCliente = ?";
+        String sql = "update Cliente set nomeCliente = ?, emailCliente = ?, celularCliente = ?, cep=?, enderecoCliente = ? where cpfCliente = ?";
 
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);
@@ -68,6 +68,7 @@ public class ClienteDAO implements DAO<Cliente> {
         pst.setString(3, model.getCelular());
         pst.setString(4, model.getCep());
         pst.setString(5, model.getEndereco());
+        pst.setString(6, model.getCpf());
 
         alterado = pst.executeUpdate() > 0 ? true : false;
         Banco.desconectar();
@@ -77,7 +78,6 @@ public class ClienteDAO implements DAO<Cliente> {
 
     @Override
     public Cliente buscaID(Cliente model) throws SQLException {
-        EstadoCodeDAO estadoDAO = new EstadoCodeDAO();
 
         cliente = null;
         String sql = "select * from Cliente where cpfCliente = ?";

@@ -165,7 +165,7 @@ public class FXML_ingredientesController implements Initializable {
             if (alterou) {
                 mensagem("Os dados foram alterados com sucesso!");
             } else {
-                mensagem("Verifique os campos");
+                mensagem("Verifique os campos, Não é possivel alterar o ID");
             }
         } else {
             mensagem("Preencha todos os campos");

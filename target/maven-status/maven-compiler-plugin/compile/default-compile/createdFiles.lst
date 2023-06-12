@@ -22,7 +22,6 @@ br\com\fatec\DAO\DAO.class
 br\com\fatec\Controller\FXML_cadastroPedidosController.class
 br\com\fatec\App.class
 br\com\fatec\CadastroProdutos.class
-br\com\fatec\DAO\EstadoCodeDAO.class
 br\com\fatec\DAO\PedidoDAO.class
 br\com\fatec\Controller\FXML_fornecedorController.class
 br\com\fatec\model\Fornecedor.class
